@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIckstart Kassel - Workshop Anmeldung</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .header h1 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+        }
+        
+        .welcome-screen {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        
+        .welcome-screen h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .welcome-screen input {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .welcome-screen input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .workshops {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .workshop-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .workshop-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .workshop-card.registered {
+            border: 2px solid #4caf50;
+            background: #f1f8f4;
+        }
+        
+        .workshop-card.full {
+            opacity: 0.6;
+        }
+        
+        .workshop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+        
+        .workshop-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .workshop-meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .workshop-description {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .workshop-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .participants-info {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .badge-success {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .badge-warning {
+            background: #ff9800;
+            color: white;
+        }
+        
+        .badge-danger {
+            background: #f44336;
+            color: white;
+        }
+        
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        
+        .btn-danger {
+            background: #f44336;
+        }
+        
+        .my-registrations {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .my-registrations h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .registration-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .alert-info {
+            background: #e3f2fd;
+            color: #1976d2;
+            border: 1px solid #90caf9;
+        }
+        
+        .alert-success {
+            background: #e8f5e9;
+            color: #388e3c;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .alert-warning {
+            background: #fff3e0;
+            color: #f57c00;
+            border: 1px solid #ffcc80;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .workshop-title {
+                font-size: 1.1rem;
+            }
+            
+            .workshop-footer {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .btn-small {
+                width: 100%;
+            }
+        }
+
+        .credits {
+      background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 18px 25px;
+    border-radius: 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.credits h4 {
+    margin-bottom: 10px;
+    color: #444;
+}
+
+.credits ul {
+    margin-left: 20px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div class="credits">
+        <h4>📌 Credits</h4>
+        <p>Dies ist eine Demo-Anwendung.<br>
+        Diese Anwendung wurde bei <strong>KIckstart Kassel</strong> am <strong>19.11.2025</strong> genutzt.<br>
+        Die Anwendung wurde vollständig gevibecoded.<br>
+        Den Code findet ihr hier: <a href="https://github.com/sebastianreinig/Workshop-Anmeldung-KIckstart-Kassel">Gehe zu Github</a>
+
+        <p><strong>Vielen Dank an</strong></p>
+        <ul>
+            <li>VSB</li>
+            <li>Wirtschaftsförderung</li>
+            <li>André Knie</li>
+        </ul>
+
+    </div>
+</div>
+
+    <div class="container">
+        <div id="loading" class="loading">
+            <p>⏳ Lade Daten...</p>
+        </div>
+        
+        <div id="welcome" class="hidden">
+            <div class="header">
+                <h1>🚀 KIckstart Kassel</h1>
+                <p>Workshop-Anmeldung</p>
+            </div>
+            
+            <div class="welcome-screen">
+                <h2>Willkommen!</h2>
+                <p>Bitte gib deinen Namen ein, um fortzufahren:</p>
+                <input type="text" id="nameInput" placeholder="Dein Name" maxlength="100">
+                <br>
+                <button class="btn" onclick="registerUser()">Los geht's!</button>
+            </div>
+        </div>
+        
+        <div id="main" class="hidden">
+            <div class="header">
+                <h1>🚀 KIckstart Kassel</h1>
+                <p>Hallo <strong id="userName"></strong>! Wähle bis zu 2 Workshops aus.</p>
+            </div>
+            
+            <div id="closedAlert" class="alert alert-warning hidden">
+                <strong>⚠️ Anmeldung geschlossen</strong><br>
+                Die Organisation wurde abgeschlossen. Deine Workshop-Zuteilung findest du unten.
+            </div>
+            
+            <div class="my-registrations">
+                <h3>📋 Meine Anmeldungen (<span id="regCount">0</span>/2)</h3>
+                <div id="myRegistrations">
+                    <p style="color: #999;">Noch keine Anmeldungen</p>
+                </div>
+            </div>
+            
+            <div class="workshops" id="workshopList"></div>
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE = '../api';
+        let participantId = null;
+        let participantName = null;
+        let myWorkshops = [];
+        let allWorkshops = [];
+        let eventClosed = false;
+        
+        // LocalStorage löschen Funktion
+        function clearLocalData() {
+            if (confirm('Möchtest du wirklich deine lokalen Daten löschen? Du musst dich dann neu anmelden.')) {
+                localStorage.removeItem('participant_id');
+                localStorage.removeItem('participant_name');
+                location.reload();
+            }
+        }
+        
+        // Beim Laden prüfen ob bereits registriert
+        window.onload = function() {
+            const savedId = localStorage.getItem('participant_id');
+            const savedName = localStorage.getItem('participant_name');
+            
+            if (savedId && savedName) {
+                participantId = savedId;
+                participantName = savedName;
+                loadUserData();
+            } else {
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('welcome').classList.remove('hidden');
+            }
+        };
+        
+        async function registerUser() {
+            const name = document.getElementById('nameInput').value.trim();
+            
+            if (!name) {
+                alert('Bitte gib deinen Namen ein!');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/init.php`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: name })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    participantId = data.participant_id;
+                    participantName = data.name;
+                    localStorage.setItem('participant_id', participantId);
+                    localStorage.setItem('participant_name', participantName);
+                    loadUserData();
+                } else {
+                    alert('Fehler: ' + (data.error || 'Unbekannter Fehler'));
+                }
+            } catch (error) {
+                alert('Verbindungsfehler. Bitte versuche es erneut.');
+            }
+        }
+        
+        async function loadUserData() {
+            try {
+                // Status laden
+                const statusResponse = await fetch(`${API_BASE}/status.php?participant_id=${participantId}`);
+                const statusData = await statusResponse.json();
+                
+                if (statusData.success) {
+                    myWorkshops = statusData.workshops;
+                    eventClosed = statusData.event_closed;
+                }
+                
+                // Workshops laden
+                const workshopsResponse = await fetch(`${API_BASE}/workshops.php`);
+                const workshopsData = await workshopsResponse.json();
+                
+                if (workshopsData.success) {
+                    allWorkshops = workshopsData.workshops;
+                    eventClosed = workshopsData.event_closed || eventClosed;
+                }
+                
+                renderUI();
+                
+            } catch (error) {
+                alert('Fehler beim Laden der Daten');
+            }
+        }
+        
+        function renderUI() {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('welcome').classList.add('hidden');
+            document.getElementById('main').classList.remove('hidden');
+            
+            document.getElementById('userName').textContent = participantName;
+            
+            if (eventClosed) {
+                document.getElementById('closedAlert').classList.remove('hidden');
+            }
+            
+            // Reset-Button im Header anzeigen
+            const userNameEl = document.getElementById('userName');
+            const headerText = userNameEl.parentElement;
+            headerText.innerHTML = `Hallo <strong id="userName">${participantName}</strong>! Wähle bis zu 2 Workshops aus. 
+                <button onclick="clearLocalData()" style="margin-left: 15px; padding: 5px 12px; background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 8px; cursor: pointer; font-size: 13px;" title="Lokale Daten löschen und neu anmelden">🔄 Neu anmelden</button>`;
+            
+            renderMyRegistrations();
+            renderWorkshops();
+        }
+        
+        function renderMyRegistrations() {
+            const container = document.getElementById('myRegistrations');
+            const count = document.getElementById('regCount');
+            count.textContent = myWorkshops.length;
+            
+            if (myWorkshops.length === 0) {
+                container.innerHTML = '<p style="color: #999;">Noch keine Anmeldungen</p>';
+            } else {
+                container.innerHTML = myWorkshops.map(w => `
+                    <div class="registration-item">
+                        <div>
+                            <strong>${w.title}</strong>
+                            ${w.status === 'confirmed' ? '<span class="badge badge-success">Bestätigt</span>' : ''}
+                            <br>
+                            <small style="color: #666;">${w.timeslot || ''} ${w.location ? '• ' + w.location : ''}</small>
+                        </div>
+                        ${!eventClosed ? `<button class="btn btn-danger btn-small" onclick="unregister(${w.id})">Abmelden</button>` : ''}
+                    </div>
+                `).join('');
+            }
+        }
+        
+        function renderWorkshops() {
+            const container = document.getElementById('workshopList');
+            
+            container.innerHTML = allWorkshops.map(w => {
+                const isRegistered = myWorkshops.some(mw => mw.id === w.id);
+                const isFull = w.current_participants >= w.max_participants;
+                const canRegister = !eventClosed && !isRegistered && !isFull && myWorkshops.length < 2;
+                
+                return `
+                    <div class="workshop-card ${isRegistered ? 'registered' : ''} ${isFull && !isRegistered ? 'full' : ''}">
+                        <div class="workshop-header">
+                            <div style="flex: 1;">
+                                <h3 class="workshop-title">${w.title}</h3>
+                                <div class="workshop-meta">
+                                    ${w.timeslot || 'Zeit folgt'} ${w.location ? '• ' + w.location : ''}
+                                </div>
+                            </div>
+                            ${isRegistered ? '<span class="badge badge-success">✓ Angemeldet</span>' : ''}
+                        </div>
+                        
+                        ${w.description ? `<p class="workshop-description">${w.description}</p>` : ''}
+                        
+                        <div class="workshop-footer">
+                            <span class="participants-info">
+                                👥 ${w.current_participants} / ${w.max_participants} Teilnehmer
+                            </span>
+                            
+                            ${canRegister ? 
+                                `<button class="btn btn-small" onclick="register(${w.id})">Anmelden</button>` :
+                                isFull && !isRegistered ? 
+                                    '<span class="badge badge-danger">Ausgebucht</span>' :
+                                    !canRegister && !isRegistered && myWorkshops.length >= 2 ?
+                                        '<span class="badge badge-warning">Max. 2 Workshops</span>' :
+                                        ''
+                            }
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        async function register(workshopId) {
+            try {
+                const response = await fetch(`${API_BASE}/register.php`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        participant_id: participantId,
+                        workshop_id: workshopId
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    await loadUserData();
+                } else {
+                    alert('Fehler: ' + (data.error || 'Anmeldung fehlgeschlagen'));
+                }
+            } catch (error) {
+                alert('Verbindungsfehler');
+            }
+        }
+        
+        async function unregister(workshopId) {
+            if (!confirm('Möchtest du dich wirklich von diesem Workshop abmelden?')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/register.php`, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        participant_id: participantId,
+                        workshop_id: workshopId
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    await loadUserData();
+                } else {
+                    alert('Fehler: ' + (data.error || 'Abmeldung fehlgeschlagen'));
+                }
+            } catch (error) {
+                alert('Verbindungsfehler');
+            }
+        }
+        
+        // Auto-refresh alle 30 Sekunden
+        setInterval(() => {
+            if (participantId) {
+                loadUserData();
+            }
+        }, 30000);
+    </script>
+</body>
+</html>
