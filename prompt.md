@@ -1,3 +1,5 @@
+Ausgeführt in Claude.ai Sonnet 4.5:
+
 # Ziel
 Es geht um die Koordination von Workshops.
 Für ein Event wird ein Workshop-Organisations-Tool benötigt.
