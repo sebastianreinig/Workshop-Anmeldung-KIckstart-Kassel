@@ -7,6 +7,15 @@ Die App diente beim Event **KIckstart Kassel am 19.11.2025** als Demo-Anwendung 
 
 ---
 
+## 📸 Screenshots
+<img width="880" height="454" alt="Bildschirmfoto 2025-11-21 um 15 27 33" src="https://github.com/user-attachments/assets/dd35bc04-2a9c-4edf-8ebc-49464fb2dd2d" />
+<img width="919" height="668" alt="Bildschirmfoto 2025-11-21 um 15 27 48" src="https://github.com/user-attachments/assets/978d25cc-c660-463f-b43a-e6fca4866946" />
+<img width="1423" height="683" alt="Bildschirmfoto 2025-11-21 um 15 28 46" src="https://github.com/user-attachments/assets/c30c5ba5-d6d5-4107-9106-fcec7b71f225" />
+
+
+
+---
+
 ## 🎯 Features
 
 * Schnelle & intuitive Teilnehmeranmeldung
