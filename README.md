@@ -38,9 +38,9 @@ Diese Anwendung wurde erfolgreich genutzt bei **KIckstart Kassel am 19.11.2025**
 
 Ein riesiges **Dankeschön** an alle Organisatoren, Unterstützer und Ideengeber:
 
-* **VSB Nordhessen**
-* **Wirtschaftsförderung Kassel**
-* **André Knie**
+* **VSB Nordhessen** https://www.vsb-nordhessen.de/
+* **Wirtschaftsförderung Kassel** https://wfg-kassel.de/
+* **André Knie** https://d-hive.de/
 
 Ohne euch wäre dieser Use Case nicht möglich gewesen! ❤️
 
